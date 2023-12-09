@@ -9,5 +9,11 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+  
+   
+    let ans =(n*(n+1))/2
+    console.log(ans)
+    return ans ;
 }
+
+calculateTime(10000000)
