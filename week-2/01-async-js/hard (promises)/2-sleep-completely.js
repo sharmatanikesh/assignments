@@ -4,5 +4,11 @@
  */
 
 function sleep (seconds) {
-
+    return new Promise((resolve)=>{
+        console.log("I am sleeping")
+        setTimeout(resolve,seconds)
+        console.log("I am running")
+    })
 }
+console.log("Lets start the program")
+sleep(10000)
