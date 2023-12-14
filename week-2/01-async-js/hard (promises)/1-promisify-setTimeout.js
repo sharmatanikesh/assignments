@@ -7,19 +7,11 @@
 
 
 function wait(n) {
-    console.log("I am inside the function but outside the promise")
-    return new Promise((resolve,reject)=>{
-        console.log("I am inside the promise")
-        
-        setTimeout(resolve,
-        n)
+
+    return new Promise((resolve)=>{
+        setTimeout(resolve,n*1000)
         
     })
-    
 }
 
-let result = wait(10000)
-
-result.then(function(){
-    console.log("I am starting first")
-})
+module.exports = wait;
