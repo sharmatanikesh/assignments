@@ -43,7 +43,78 @@
   const bodyParser = require('body-parser');
   
   const app = express();
+  const port = 3000
   
   app.use(bodyParser.json());
+
+ 
+
+  let todo = []
+
+  app.get("/todos",function(req,res){
+
+    res.json(todo)
+  })
+
+  app.get("/todos/:id",function(req,res){
+    const totoId = Number(req.params.id)
+
+ 
+    for(let i=0;i<todo.length;i++){
+      if(todo[i].id ==totoId ){
+        res.status(200).json(todo[i])
+      }
+    }
+
+    res.status(404).send()
+
+  })
+
+  app.post("/todos",function(req,res){
+    const newTodo = {
+      id :Math.floor(Math.random()*1000000),
+      title:req.body.title,
+      description: req.body.description
+    }
+
+    todo.push(newTodo)
+    res.status(201).json(newTodo)
+
+  })
+
+  app.put("/todos/:id",function(req,res){
+    const totoId = Number(req.params.id)
+    const update = req.body
+
+    for(let i=0;i<todo.length;i++){
+      if(todo[i].id ==totoId ){
+        const ans ={...todo[i],...update}
+        todo[i] = ans
+        res.status(200).json(todo[i])
+      }
+    }
+
+  })
+
+  app.delete("/todos/:id",function(req,res){
+    const id = Number(req.params.id)
+    const newArray = todo.filter((task)=>task.id!=id)
+    if(newArray.length === todo.length){
+      res.status(404).send()
+    }else{
+      todo = newArray
+      res.status(200).json(todo)
+
+    }
+  })
+
+  app.use((req,res,next)=>{
+    res.status(404).send("Error no such route")
+  })
+
+  
+  app.listen(port,()=>{
+    console.log("Server is listening on port"+port)
+  })
   
   module.exports = app;
