@@ -5,6 +5,7 @@ const {User}= require("../db/index")
 
 // User Routes
 router.post('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     // Implement user signup logic
     const username = req.body.username 
     const password = req.body.password 
