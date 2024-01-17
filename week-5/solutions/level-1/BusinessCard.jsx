@@ -1,4 +1,5 @@
 export function BusinessCard(props) {
+    
     return (
       <div style={styles.card}>
         <h2 style={styles.name}>{props.name}</h2>
